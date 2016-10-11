@@ -5,43 +5,16 @@ namespace AdvancedCsharp.Advanced.Delegate
 
     public class DelegateAssignement
     {
-        void AskUserAndDoubleString()
+        delegate string FilterStringInput(string _string);
+
+        void FilterUserInput(FilterStringInput filterMethod)
         {
 
             Console.WriteLine("====== Hej och välkommen! =======");
             Console.Write("Ange en sträng: ");
             var answer = Console.ReadLine();
 
-            var newString = DoubleString(answer);
-
-            Console.Write($"Resultatet efter strängmanipulationen: {newString}");
-            Console.WriteLine();
-            Console.WriteLine();
-        }
-
-
-        void AskUserAndFirstFiveCharacters()
-        {
-
-            Console.WriteLine("====== Hej och välkommen! =======");
-            Console.Write("Ange en sträng: ");
-            var answer = Console.ReadLine();
-
-            var newString = FirstFiveCharacters(answer);
-            
-            Console.Write($"Resultatet efter strängmanipulationen: {newString}");
-            Console.WriteLine();
-            Console.WriteLine();
-        }
-
-        void AskUserAndToUpper()
-        {
-
-            Console.WriteLine("====== Hej och välkommen! =======");
-            Console.Write("Ange en sträng: ");
-            var answer = Console.ReadLine();
-
-            var newString = ToUpper(answer);
+            var newString = filterMethod(answer);
 
             Console.Write($"Resultatet efter strängmanipulationen: {newString}");
             Console.WriteLine();
@@ -74,9 +47,9 @@ namespace AdvancedCsharp.Advanced.Delegate
             // Skriv om koden och använd "delegates" för att förbättra koden. (Koden innehåller en del upprepningar vilket inte är så snyggt)
             // Programmet ska fungera precis som innan.
 
-            AskUserAndDoubleString();
-            AskUserAndFirstFiveCharacters();
-            AskUserAndToUpper();
+            FilterUserInput(DoubleString);
+            FilterUserInput(FirstFiveCharacters);
+            FilterUserInput(ToUpper);
         }
     }
 }
