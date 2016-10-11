@@ -7,7 +7,7 @@
             Isbn = isbn;
         }
 
-        public long Isbn { get; set; }
+        public long Isbn { get; }
         public string Title { get; set; }
         public string Author { get; set; }
     }

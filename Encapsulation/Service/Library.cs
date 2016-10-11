@@ -10,10 +10,10 @@ namespace AdvancedCsharp.Advanced.Encapsulation.Service
 
         public List<Book> AllBooks;
 
-        public int i=0; 
+        private int i=0; 
 
-        public string hungerGamesPrefix = "Hunger Games";
-        public long hungerGamesStartIsbn = 1000000;
+        private string hungerGamesPrefix = "Hunger Games";
+        private long hungerGamesStartIsbn = 1000000;
 
         public Library(string address)
         {
@@ -26,7 +26,7 @@ namespace AdvancedCsharp.Advanced.Encapsulation.Service
             Address = address;
         }
 
-        private void ChangeHungerGamesStartIsbn()
+        public void ChangeHungerGamesStartIsbn()
         {
             hungerGamesStartIsbn = 5000000;
         }
