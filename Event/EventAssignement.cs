@@ -14,7 +14,28 @@ namespace AdvancedCsharp.Advanced.Event
 
         class StringParser
         {
-            // Implementera denna klass
+            public Person ParsePerson(string s)
+            {
+                string name;
+                int age;
+
+                try
+                {
+                    var person = s.Split(',');
+                    if (person.Length > 2)
+                    {
+                        return null;
+                    }
+
+                    name = person[0];                   
+                    bool hasAge = int.TryParse(person[1], out age);       
+                }
+                catch
+                {
+                    return null;
+                }
+                return new Person { Name = name, Age = age };
+            }
         }
 
         void DisplayPerson(Person p)
@@ -41,11 +62,11 @@ namespace AdvancedCsharp.Advanced.Event
             Console.WriteLine("\n----- Utan events -----");
 
             // Avkommentera koden:
-            //DisplayPerson(sp.ParsePerson(test1));
-            //DisplayPerson(sp.ParsePerson(test2));
-            //DisplayPerson(sp.ParsePerson(test3));             // Ska inte skriva ut någonting
-            //DisplayPerson(sp.ParsePerson(test4));             // Ska inte skriva ut någonting
-            //DisplayPerson(sp.ParsePerson(test5));             // Ska inte skriva ut någonting
+            DisplayPerson(sp.ParsePerson(test1));
+            DisplayPerson(sp.ParsePerson(test2));
+            DisplayPerson(sp.ParsePerson(test3));             // Ska inte skriva ut någonting
+            DisplayPerson(sp.ParsePerson(test4));             // Ska inte skriva ut någonting
+            DisplayPerson(sp.ParsePerson(test5));             // Ska inte skriva ut någonting
 
             Console.WriteLine("\n----- Med events -----");
 

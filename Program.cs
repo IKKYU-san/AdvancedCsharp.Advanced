@@ -14,7 +14,7 @@ namespace AdvancedCsharp.Advanced
         {
             SetupConsoleWindow();
 
-            new EncapsulationAssignement().Run();
+            new EventAssignement().Run();
 
         }
 
