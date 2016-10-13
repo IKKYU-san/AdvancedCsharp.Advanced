@@ -14,6 +14,9 @@ namespace AdvancedCsharp.Advanced.Event
 
         class StringParser
         {
+            public delegate string ProcessNameHandler(string name);
+            public event ProcessNameHandler ProcessName;
+
             public Person ParsePerson(string s)
             {
                 string name;
@@ -27,7 +30,11 @@ namespace AdvancedCsharp.Advanced.Event
                         return null;
                     }
 
-                    name = person[0];                   
+                    name = person[0];
+                    if (ProcessName != null)
+                    {
+                        name = ProcessName(name);
+                    }
                     bool hasAge = int.TryParse(person[1], out age);       
                 }
                 catch
@@ -71,11 +78,11 @@ namespace AdvancedCsharp.Advanced.Event
             Console.WriteLine("\n----- Med events -----");
 
             // Avkommentera koden:
-            //sp.ProcessName += CleanupAndUpperCase;             // Här förändrar vi beteendet på ParsePerson genom att haka på en egen metod (som tar bort mellanslag och gör VERSALER)
+            sp.ProcessName += CleanupAndUpperCase;             // Här förändrar vi beteendet på ParsePerson genom att haka på en egen metod (som tar bort mellanslag och gör VERSALER)
             //sp.ProcessAge += Cleanup;                          // Här förändrar vi beteendet på ParsePerson genom att haka på en egen metod (som tar bort mellanslag)
             //sp.ErrorOccured += ReportErrorToUser;              // Här förändrar vi beteendet på ParsePerson genom att tala om vad som händer om indata har fel format
-            //DisplayPerson(sp.ParsePerson(test1));
-            //DisplayPerson(sp.ParsePerson(test2));
+            DisplayPerson(sp.ParsePerson(test1));
+            DisplayPerson(sp.ParsePerson(test2));
             //DisplayPerson(sp.ParsePerson(test3));             // Ska ge felmeddelande till användaren
             //DisplayPerson(sp.ParsePerson(test4));             // Ska ge felmeddelande till användaren
             //DisplayPerson(sp.ParsePerson(test5));             // Ska ge felmeddelande till användaren
@@ -93,13 +100,16 @@ namespace AdvancedCsharp.Advanced.Event
         {
             // Implementera denna metod
             // Ta bort mellanslag före och efter strängen + gör om strängen till versaler
-            throw new NotImplementedException();
+            return s.Trim().ToUpper();
+            //throw new NotImplementedException();
         }
 
         private string Cleanup(string s)
         {
             // Implementera denna metod
             // Ta bort mellanslag före och efter strängen
+            string name = s.Trim();
+            return name;
             throw new NotImplementedException();
         }
 
